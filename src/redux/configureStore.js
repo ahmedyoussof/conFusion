@@ -3,8 +3,8 @@ import { Reducer, initialState } from './reducer';
 
 export const ConfigureStore = () => {
     const Store = createStore(
-        Reducer,
-        initialState
+        Reducer, // reducer
+        initialState // our initialState
     );
 
     return Store;
