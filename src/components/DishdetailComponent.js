@@ -3,9 +3,10 @@ import { Control, Errors, LocalForm } from "react-redux-form";
 import { Link } from 'react-router-dom';
 import { Card, CardImg, CardText, CardBody, CardTitle, BreadcrumbItem, Breadcrumb, Row, Col, Button, Label } from 'reactstrap';
 import { Form, Modal, ModalBody, ModalHeader } from "reactstrap";
+import { addComment } from "../redux/ActionCreators";
 
 
-function RenderComments({ comments }) {
+function RenderComments({ comments, addComment, dishId }) {
     return (
         <div className="col-12 col-md-5 m-1">
             <h4>Comments</h4>
@@ -20,7 +21,7 @@ function RenderComments({ comments }) {
                     );
                 })}
             </ul>
-            <CommentForm />
+            <CommentForm dishId={dishId} addComment={addComment} />
         </div>
     );
 
@@ -58,7 +59,8 @@ const Dishdetail = (props) => {
                         <hr />
                     </div>
                     <RenderDish dish={props.dish} />
-                    <RenderComments comments={props.comments} />
+                    <RenderComments comments={props.comments} addComment={props.addComment}
+                        dishId={props.dish.id} />
                 </div>
             </div>
         );
@@ -86,15 +88,14 @@ class CommentForm extends Component {
     }
 
     toggleModal() {
-        console.log('in toggle');
         this.setState({
             isModalOpen: !this.state.isModalOpen
         });
     }
 
     handleSubmit(values) {
-        console.log("Current State is: " + JSON.stringify(values));
-        alert("Current State is: " + JSON.stringify(values));
+        this.toggleModal();
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
 
