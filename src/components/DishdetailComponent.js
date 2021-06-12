@@ -102,7 +102,7 @@ class CommentForm extends Component {
     render() {
 
         return (
-            <div>
+            <React.Fragment>
                 <Button outline onClick={this.toggleModal}><span className="fa fa-pencil" /> Submit Comment</Button>
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
@@ -160,7 +160,7 @@ class CommentForm extends Component {
                         </LocalForm>
                     </ModalBody>
                 </Modal>
-            </div>
+            </React.Fragment>
         );
     }
 
