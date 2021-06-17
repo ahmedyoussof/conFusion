@@ -3,7 +3,7 @@ import { Control, Errors, LocalForm } from "react-redux-form";
 import { Link } from 'react-router-dom';
 import { Card, CardImg, CardText, CardBody, CardTitle, BreadcrumbItem, Breadcrumb, Row, Col, Button, Label } from 'reactstrap';
 import { Form, Modal, ModalBody, ModalHeader } from "reactstrap";
-import { addComment } from "../redux/ActionCreators";
+import { Loading } from './LoadingComponent'
 
 
 function RenderComments({ comments, addComment, dishId }) {
@@ -45,8 +45,25 @@ function RenderDish({ dish }) {
 }
 
 const Dishdetail = (props) => {
+    if (props.isLoading) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+        );
+    } else if (props.errMess) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <h4>{props.errMess}</h4>
+                </div>
+            </div>
+        );
+    }
 
-    if (props.dish != null) {
+    else if (props.dish != null) {
         return (
             <div className="container">
                 <div className="row">
@@ -155,7 +172,7 @@ class CommentForm extends Component {
                                 <Col md={{ size: 12 }}>
                                     <Button type="submit" color="primary">
                                         Submit
-                                </Button>
+                                    </Button>
                                 </Col>
                             </Row>
                         </LocalForm>
