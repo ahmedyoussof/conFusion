@@ -3,7 +3,8 @@ import { Control, Errors, LocalForm } from "react-redux-form";
 import { Link } from 'react-router-dom';
 import { Card, CardImg, CardText, CardBody, CardTitle, BreadcrumbItem, Breadcrumb, Row, Col, Button, Label } from 'reactstrap';
 import { Form, Modal, ModalBody, ModalHeader } from "reactstrap";
-import { Loading } from './LoadingComponent'
+import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 
 function RenderComments({ comments, addComment, dishId }) {
@@ -34,7 +35,7 @@ function RenderDish({ dish }) {
     return (
         <div className="col-12 col-md-5 m-1">
             <Card>
-                <CardImg top src={dish.image} alt={dish.name} />
+                <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                 <CardBody>
                     <CardTitle>{dish.name}</CardTitle>
                     <CardText>{dish.description}</CardText>
